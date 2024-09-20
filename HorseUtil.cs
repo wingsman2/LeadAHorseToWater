@@ -5,6 +5,7 @@ using System.Linq;
 using Bloodstone.API;
 using Il2CppInterop.Runtime;
 using ProjectM;
+using ProjectM.Network;
 using Stunlock.Core;
 using Unity.Collections;
 using Unity.Entities;
@@ -14,6 +15,8 @@ using Unity.Transforms;
 internal static class HorseUtil
 {
 	private static Entity empty_entity = new Entity();
+
+	public static PrefabGUID DeadVampHorseBuffGuid = new PrefabGUID(525019977);
 
 	private static Dictionary<string, PrefabGUID> HorseGuids = new()
 	{
@@ -110,6 +113,25 @@ internal static class HorseUtil
 	/// <param name="horse"></param>
 	internal static void KillWithNoDrops(Entity horse)
 	{
+		if (horse.Has<Immortal>()) {
+			// Don't actually kill a vampire horse, otherwise the owner won't be able to resummon it.
+			// Instead, the game has a special buff for temporarily "killing" vamp horses.
+			var des = VWorld.Server.GetExistingSystemManaged<DebugEventsSystem>();
+			var buffEvent = new ApplyBuffDebugEvent()
+			{
+				BuffPrefabGUID = DeadVampHorseBuffGuid
+			};
+
+			// using FromCharacter like this feels dirty but it works. Manually managing a buff entity for a BuffBuffer to reference would be wayyyyy too complicated.
+			var fromCharacter = new FromCharacter()
+			{
+				User = horse,
+				Character = horse
+			};
+			des.ApplyBuff(fromCharacter, buffEvent);
+			return;
+		}
+
 		horse.With((ref Health t) =>
 		{
 			t.IsDead = true;
