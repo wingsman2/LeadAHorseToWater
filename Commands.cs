@@ -325,16 +325,21 @@ public static partial class Commands
 			public void Famish(ChatCommandContext ctx, float radius = 5f)
 			{
 				var horses = HorseUtil.ClosestHorses(ctx.Event.SenderCharacterEntity, radius);
+				int hungryCount = 0;
 				foreach (var horse in horses)
 				{
+					if (!horse.Has<FeedableInventory>()) continue;
+
 					horse.With((ref FeedableInventory t) =>
 					{
 						t.FeedProgressTime = 0;
+						hungryCount++;
 					});
 				}
 
-				ctx.Reply($"{horses.Count} horses have been made hungry.");
+				ctx.Reply($"{hungryCount} horses have been made hungry.");
 			}
+
 		}
 	}
 }

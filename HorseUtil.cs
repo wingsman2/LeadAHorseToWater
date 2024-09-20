@@ -36,7 +36,7 @@ internal static class HorseUtil
 	{
 		var horseQuery = VWorld.Server.EntityManager.CreateEntityQuery(new EntityQueryDesc()
 		{
-			All = new[] { ComponentType.ReadWrite<FeedableInventory>(),
+			All = new[] {
 					ComponentType.ReadWrite<NameableInteractable>(),
 					ComponentType.ReadWrite<Mountable>(),
 					ComponentType.ReadOnly<LocalToWorld>(),

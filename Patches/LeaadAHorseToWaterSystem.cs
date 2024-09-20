@@ -117,8 +117,11 @@ public static class LeadAHorseToWaterSystem
 	private static bool IsHorseWeFeed(Entity horse)
 	{
 		EntityManager em = VWorld.Server.EntityManager;
-		ComponentLookup<Team> getTeam = em.GetComponentLookup<Team>(true);
+		if (!horse.Has<FeedableInventory>()) {
+			return false;
+		}
 
+		ComponentLookup<Team> getTeam = em.GetComponentLookup<Team>(true);
 		if (em.HasComponent<Team>(horse))
 		{
 			var teamhorse = getTeam[horse];
