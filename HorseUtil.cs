@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Bloodstone.API;
 using ProjectM;
+using Stunlock.Core;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -28,7 +29,7 @@ internal static class HorseUtil
 		//var horses = _r.Next(3);
 		var horse = HorseGuids["Regular"];
 		// TODO: Cache and Improve (np now :P)
-		VWorld.Server.GetExistingSystem<UnitSpawnerUpdateSystem>().SpawnUnit(empty_entity, horse, localPos, countlocal, 1, 2, -1);
+		VWorld.Server.GetExistingSystemManaged<UnitSpawnerUpdateSystem>().SpawnUnit(empty_entity, horse, localPos, countlocal, 1, 2, -1);
 	}
 
 	internal static NativeArray<Entity> GetHorses()
@@ -72,7 +73,7 @@ internal static class HorseUtil
 	internal static bool isTamed(Entity e)
 	{
 		EntityManager em = VWorld.Server.EntityManager;
-		ComponentDataFromEntity<Team> getTeam = VWorld.Server.EntityManager.GetComponentDataFromEntity<Team>();
+		ComponentLookup<Team> getTeam = VWorld.Server.EntityManager.GetComponentLookup<Team>(true);
 
 		if (!em.HasComponent<Team>(e)) return false;
 		var teamhorse = getTeam[e];

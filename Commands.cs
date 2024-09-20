@@ -14,6 +14,7 @@ using Il2CppInterop.Runtime;
 using LeadAHorseToWater.Processes;
 using ProjectM;
 using ProjectM.Network;
+using Stunlock.Core;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;

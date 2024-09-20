@@ -2,6 +2,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using LeadAHorseToWater.Processes;
 using ProjectM;
+using Stunlock.Core;
 using Unity.Entities;
 
 namespace LeadAHorseToWater.Patches;

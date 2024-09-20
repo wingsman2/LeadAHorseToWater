@@ -31,7 +31,9 @@ public static class FeedableInventorySystem_Update_Patch
 
 			NoUpdateBefore = DateTime.Now.AddSeconds(1.5);
 
-			var horses = __instance.__OnUpdate_LambdaJob0_entityQuery.ToEntityArray(Allocator.Temp);
+			//var horses = __instance.__OnUpdate_LambdaJob0_entityQuery.ToEntityArray(Allocator.Temp);
+			var horses = __instance.__query_1433501692_0.ToEntityArray(Allocator.Temp);
+			return; // TODO: which entity query to use now
 
 			if (horses.Length == 0)
 			{
@@ -43,7 +45,7 @@ public static class FeedableInventorySystem_Update_Patch
 
 			foreach (var horseEntity in horses)
 			{
-				if (!IsHorseWeFeed(horseEntity, __instance)) continue;
+				if (!IsHorseWeFeed(horseEntity)) continue;
 
 				var localToWorld = VWorld.Server.EntityManager.GetComponentData<LocalToWorld>(horseEntity);
 				var horsePosition = localToWorld.Position;
@@ -105,10 +107,10 @@ public static class FeedableInventorySystem_Update_Patch
 		});
 	}
 
-	private static bool IsHorseWeFeed(Entity horse, ComponentSystemBase instance)
+	private static bool IsHorseWeFeed(Entity horse)
 	{
-		EntityManager em = instance.World.EntityManager;
-		ComponentDataFromEntity<Team> getTeam = instance.GetComponentDataFromEntity<Team>();
+		EntityManager em = VWorld.Server.EntityManager;
+		ComponentLookup<Team> getTeam = em.GetComponentLookup<Team>(true);
 
 		if (em.HasComponent<Team>(horse))
 		{
