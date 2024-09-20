@@ -79,7 +79,7 @@ public static class LeadAHorseToWaterSystem
 				{
 					 _log?.LogDebug($"Feeding horse <{horseEntity.Index}> Found inventory: FeedTime={inventory.FeedTime} FeedProgressTime={inventory.FeedProgressTime} IsFed={inventory.IsFed} DamageTickTime={inventory.DamageTickTime} IsActive={inventory.IsActive}");
 					inventory.FeedProgressTime = Mathf.Max(inventory.FeedProgressTime, Mathf.Min(inventory.FeedProgressTime + Settings.SECONDS_DRINK_PER_TICK.Value, Settings.MAX_DRINK_AMOUNT.Value));
-					// inventory.IsFed = true; // don't drink canteens? // kind of... but IsFed enables/disables ticking of the feed bar. we would set it to false to disable ticking
+					inventory.IsFed = true; // re-enable ticking of feed progress in case it was already depleted (e.g. a starving horse).
 				});
 			}
 		}
