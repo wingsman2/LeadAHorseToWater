@@ -78,8 +78,8 @@ BreedingRequiredItem = -570287766
 
 ## This is the name of the required item that will be consumed.
 # Setting type: String
-# Default value: special fish
-BreedingCostItemName = special fish
+# Default value: special fish (twilight snapper)
+BreedingCostItemName = special fish (twilight snapper)
 
 ## This is the amount of the required item consumed.
 # Setting type: Int32
