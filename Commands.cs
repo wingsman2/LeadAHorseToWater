@@ -291,11 +291,7 @@ public static partial class Commands
 			public void Kill(ChatCommandContext ctx, Horse horse = null)
 			{
 				horse ??= GetRequiredClosestHorse(ctx);
-				horse.Entity.With((ref Health t) =>
-				{
-					t.IsDead = true;
-				});
-				VWorld.Server.EntityManager.AddComponent(horse.Entity, Il2CppType.Of<Dead>());
+				HorseUtil.KillWithNoDrops(horse.Entity);
 				ctx.Reply($"Horse removed.");
 			}
 
@@ -310,11 +306,7 @@ public static partial class Commands
 				foreach (var horse in horses)
 				{
 					if (remaining == 0) break;
-					horse.With((ref Health t) =>
-					{
-						t.IsDead = true;
-					});
-					VWorld.Server.EntityManager.AddComponent(horse, Il2CppType.Of<Dead>());
+					HorseUtil.KillWithNoDrops(horse);
 					remaining--;
 				}
 

@@ -3,6 +3,7 @@ namespace LeadAHorseToWater.VCFCompat;
 using System.Collections.Generic;
 using System.Linq;
 using Bloodstone.API;
+using Il2CppInterop.Runtime;
 using ProjectM;
 using Stunlock.Core;
 using Unity.Collections;
@@ -101,5 +102,18 @@ internal static class HorseUtil
 		}
 
 		return results;
+	}
+
+    /// <summary>
+	/// Kill a horse without dropping any loot
+	/// </summary>
+	/// <param name="horse"></param>
+	internal static void KillWithNoDrops(Entity horse)
+	{
+		horse.With((ref Health t) =>
+		{
+			t.IsDead = true;
+		});
+		VWorld.Server.EntityManager.AddComponent(horse, Il2CppType.Of<Dead>());
 	}
 }
