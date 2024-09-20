@@ -71,16 +71,6 @@ Spawns either one or `count` horses around you.
 ```ini
 [Breeding]
 
-## Enables the cooldown for breeding horses.
-# Setting type: Boolean
-# Default value: true
-EnableBreedingCooldown = true
-
-## This is the cooldown in seconds for breeding horses.
-# Setting type: Int32
-# Default value: 600
-BreedingCooldown = 600
-
 ## This prefab is consumed as a cost to breed horses.
 # Setting type: Int32
 # Default value: -570287766
