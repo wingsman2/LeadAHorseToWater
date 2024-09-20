@@ -320,6 +320,21 @@ public static partial class Commands
 
 				ctx.Reply($"Removed {toRemove} horses.");
 			}
+
+			[Command("famish", adminOnly: true)]
+			public void Famish(ChatCommandContext ctx, float radius = 5f)
+			{
+				var horses = HorseUtil.ClosestHorses(ctx.Event.SenderCharacterEntity, radius);
+				foreach (var horse in horses)
+				{
+					horse.With((ref FeedableInventory t) =>
+					{
+						t.FeedProgressTime = 0;
+					});
+				}
+
+				ctx.Reply($"{horses.Count} horses have been made hungry.");
+			}
 		}
 	}
 }

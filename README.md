@@ -59,6 +59,10 @@ Removes the horse immediately without any loot or corpse.
 
 **WARNING**: This command will remove horses within the radius of the player. It choose `percentage` of the horses within the `radius`. This command is very useful for cleaning up a large number of horses. It is recommended to use a small radius to start. The default radius of 5 is about 1 tile. The default percentage 1 means 100% of the horses within the radius will be removed.
 
+#### 🔒 `.horse famish [radius=5]`
+
+Make all horses within the `radius` hungry enough to feed. (depletes satiety)
+
 #### 🔒 `.horse spawn [count=1]`
 
 Spawns either one or `count` horses around you.
