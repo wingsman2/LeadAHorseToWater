@@ -77,7 +77,7 @@ public static class LeadAHorseToWaterSystem
 
 				horseEntity.WithComponentData((ref FeedableInventory inventory) =>
 				{
-					 _log?.LogDebug($"Feeding horse <{horseEntity.Index}> Found inventory: FeedTime={inventory.FeedTime} FeedProgressTime={inventory.FeedProgressTime} IsFed={inventory.IsFed} DamageTickTime={inventory.DamageTickTime} IsActive={inventory.IsActive}");
+					//_log?.LogDebug($"Feeding horse <{horseEntity.Index}> Found inventory: FeedTime={inventory.FeedTime} FeedProgressTime={inventory.FeedProgressTime} IsFed={inventory.IsFed} DamageTickTime={inventory.DamageTickTime} IsActive={inventory.IsActive}");
 					inventory.FeedProgressTime = Mathf.Max(inventory.FeedProgressTime, Mathf.Min(inventory.FeedProgressTime + Settings.SECONDS_DRINK_PER_TICK.Value, Settings.MAX_DRINK_AMOUNT.Value));
 					inventory.IsFed = true; // re-enable ticking of feed progress in case it was already depleted (e.g. a starving horse).
 				});
